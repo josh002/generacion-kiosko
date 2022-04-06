@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Generacion Kiosko",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
