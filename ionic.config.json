@@ -1,0 +1,7 @@
+{
+  "name": "Generacion Kiosko",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
