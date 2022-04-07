@@ -16,7 +16,7 @@ export class LocalStorageService {
       listaProductos = [];
     }
     const existe = listaProductos.filter(item => item.codigo === producto.codigo);
-    if (existe.length > 1) { return; };
+    if (existe.length > 0) { return; };
     listaProductos.push(producto);
     localStorage.setItem(LocalStorage.listaProductos, JSON.stringify(listaProductos));
   }
@@ -39,6 +39,11 @@ export class LocalStorageService {
     const listaProductos: Producto[] = JSON.parse(localStorage.getItem(LocalStorage.listaProductos));
     const productoBuscado = listaProductos.find(producto => producto.codigo === codigoProducto);
     return productoBuscado;
+  }
+
+  obtenerListaProductos(): Producto[] | undefined {
+    const listaProductos: Producto[] = JSON.parse(localStorage.getItem(LocalStorage.listaProductos));
+    return listaProductos;
   }
 
   //-------- TRANSACCIONES -----------

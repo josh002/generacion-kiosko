@@ -8,7 +8,17 @@
 
 <ion-content [fullscreen]="true">
   <div class="lista-productos-container">
-
+    <ion-card *ngFor="let producto of listaProductos">
+      <ion-item lines="full">
+        <div class="producto-info">
+          <h3>{{producto.nombre}}</h3>
+          <div class="precio">$ {{producto.precio}}</div>
+        </div>
+        <ion-button color="dark" slot="end" fill="clear" (click)="editarProducto(producto)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="nuevoProducto()">

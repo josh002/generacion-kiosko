@@ -15,14 +15,11 @@
       <ion-input inputmode="numeric" [(ngModel)]="productoNuevo.precio"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label>
-        <h3>Codigo</h3>
-        <div class="codigo">{{productoNuevo.codigo}}</div>
-      </ion-label>
-      <ion-button slot="end" (click)="escanearCodigo()">
+      <ion-label position="floating">Codigo</ion-label>
+      <ion-input [(ngModel)]="productoNuevo.codigo"></ion-input>
+      <ion-button class="scan-button" slot="end" (click)="escanearCodigo()">
         <ion-icon slot="icon-only" name="barcode-outline"></ion-icon>
       </ion-button>
-
     </ion-item>
   </ion-card>
   <ion-button class="save-button" (click)="guardarProducto()" expand="block" shape="round">

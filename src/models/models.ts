@@ -5,7 +5,7 @@ export class Producto {
     constructor() {
         this.nombre = '';
         this.precio = null;
-        this.codigo = '324234';
+        this.codigo = '';
     }
 }
 

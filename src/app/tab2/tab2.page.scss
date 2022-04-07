@@ -1,3 +1,19 @@
-.lista-productos-container{
-    
+.lista-productos-container {
+    .producto-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        h3 {
+            font-weight: bold;
+            text-transform: capitalize;
+            font-size: 20px;
+            margin: 0;
+        }
+        .precio {
+            font-size: 18px;
+            font-weight: bold;
+            color: gray;
+        }
+    }
 }
