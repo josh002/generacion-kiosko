@@ -2,5 +2,16 @@
 	"appId": "generacion.kiosko",
 	"appName": "Generacion Kiosko",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 2000,
+			"launchAutoHide": true,
+			"backgroundColor": "#ffffff",
+			"androidSplashResourceName": "splash",
+			"androidScaleType": "FIT_CENTER",
+			"splashFullScreen": true,
+			"splashImmersive": true
+		}
+	}
 }
