@@ -1,7 +1,12 @@
-export interface Producto {
+export class Producto {
     nombre: string;
     precio: number;
     codigo: string;
+    constructor() {
+        this.nombre = '';
+        this.precio = null;
+        this.codigo = '324234';
+    }
 }
 
 export interface Transaccion {

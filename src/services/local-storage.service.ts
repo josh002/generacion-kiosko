@@ -16,8 +16,9 @@ export class LocalStorageService {
       listaProductos = [];
     }
     const existe = listaProductos.filter(item => item.codigo === producto.codigo);
-    if (existe.length > 1) { return; }
-    localStorage.setItem(LocalStorage.listaProductos, JSON.stringify(listaProductos.push()));
+    if (existe.length > 1) { return; };
+    listaProductos.push(producto);
+    localStorage.setItem(LocalStorage.listaProductos, JSON.stringify(listaProductos));
   }
 
   eliminarProducto(codigoProducto: string) {
