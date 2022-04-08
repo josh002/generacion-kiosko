@@ -36,8 +36,8 @@ export class TransaccionNuevaPage implements OnInit {
     this.barcodeScanner.scan({ showTorchButton: true }).then(barcodeData => {
       const producto = this.localStorageService.obtenerProducto(barcodeData.text);
       if (producto) { this.transaccionNueva.listaProductos.push(producto); }
+      this.calcularTotal();
     });
-    this.calcularTotal();
   }
 
   guardarTransaccion() {

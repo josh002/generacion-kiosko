@@ -35,4 +35,9 @@ export class Tab2Page {
   async editarProducto(producto: Producto) {
     // this.localStorageService.editarProducto(producto);
   }
+
+  eliminarProducto(producto: Producto) {
+    this.localStorageService.eliminarProducto(producto.codigo);
+    this.obtenerProductos();
+  }
 }

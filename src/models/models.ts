@@ -4,7 +4,7 @@ export class Producto {
     codigo: string;
     constructor() {
         this.nombre = '';
-        this.precio = 0;
+        this.precio = null;
         this.codigo = '';
     }
 }

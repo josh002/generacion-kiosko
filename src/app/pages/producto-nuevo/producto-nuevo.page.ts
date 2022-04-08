@@ -45,4 +45,13 @@ export class ProductoNuevoPage implements OnInit {
   dismissModal() {
     this.modalController.dismiss();
   }
+
+  inputChange() {
+    console.log(this.productoNuevo.precio[0]);
+    if (this.productoNuevo.precio[0] < 1) {
+      const arrNumber = this.productoNuevo.precio.toString().split('');
+      arrNumber.shift();
+      this.productoNuevo.precio = Number(arrNumber.join(''));
+    }
+  }
 }

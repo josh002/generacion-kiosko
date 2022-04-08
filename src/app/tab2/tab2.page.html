@@ -14,9 +14,14 @@
           <h3>{{producto.nombre}}</h3>
           <div class="precio">$ {{producto.precio}}</div>
         </div>
-        <ion-button color="dark" slot="end" fill="clear" (click)="editarProducto(producto)">
-          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-        </ion-button>
+        <div slot="end">
+          <ion-button color="dark" fill="clear" (click)="editarProducto(producto)">
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button color="danger" fill="clear" (click)="eliminarProducto(producto)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
       </ion-item>
     </ion-card>
   </div>
