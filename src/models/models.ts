@@ -14,14 +14,13 @@ export class Transaccion {
     total: number;
     id: string;
     idJornada: string;
-    fecha: string;
+    hora: string;
 
     constructor() {
         this.listaProductos = [];
         this.total = 0;
-        this.id = '';
-        this.idJornada = '';
-        this.fecha = '';
+        this.idJornada = new Date().toLocaleDateString('ES-AR');;
+        this.hora = '';
     }
 }
 
@@ -33,7 +32,7 @@ export class Jornada {
     constructor(id: string) {
         this.listaTransacciones = [];
         this.total = 0;
-        this.fecha = '';
+        this.fecha = id;
         this.id = id;
     }
 }

@@ -18,13 +18,14 @@ export class Tab1Page {
     public modalController: ModalController,
   ) {
     this.idJornada = new Date().toLocaleDateString('ES-AR');
+    this.obtenerJornada();
   }
 
   ionViewWillEnter() {
-    this.obtenerJornada();
   }
+
   obtenerJornada() {
-    this.localStorageService.obtenerJornada(this.idJornada);
+    this.jornada = this.localStorageService.obtenerJornada(this.idJornada);
   }
 
   async nuevoProducto() {

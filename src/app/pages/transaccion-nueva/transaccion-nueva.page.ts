@@ -21,7 +21,6 @@ export class TransaccionNuevaPage implements OnInit {
 
   ionViewWillEnter() {
     this.obtenerProductos();
-    this.transaccionNueva.listaProductos = this.listaProductos; //borrar solo para testing
   }
 
   ngOnInit() {
@@ -42,6 +41,9 @@ export class TransaccionNuevaPage implements OnInit {
   }
 
   guardarTransaccion() {
+    const hora = new Date().toLocaleTimeString('Es-Ar').split(':');
+    this.transaccionNueva.hora = hora[0] + ':' + hora[1];
+    this.localStorageService.guardarTransaccion(this.transaccionNueva);
     this.modalController.dismiss();
   }
 

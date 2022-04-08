@@ -49,14 +49,14 @@ export class LocalStorageService {
 
   //-------- TRANSACCIONES -----------
   guardarTransaccion(transaccion: Transaccion) {
-    let listaJornadas: Transaccion[] = JSON.parse(localStorage.getItem(LocalStorage.listaJornadas));
-    if (!listaJornadas) {
-      localStorage.setItem(LocalStorage.listaJornadas, JSON.stringify([]));
-      listaJornadas = [];
-    }
-    const existe = listaJornadas.filter(item => item.fecha === transaccion.fecha);
-    if (existe.length > 1) { return; }
-    localStorage.setItem(LocalStorage.listaProductos, JSON.stringify(listaJornadas.push()));
+    let listaJornadas: Jornada[] = JSON.parse(localStorage.getItem(LocalStorage.listaJornadas));
+    listaJornadas = listaJornadas.map(item => {
+      if (item.id === transaccion.idJornada) {
+        item.listaTransacciones.push(transaccion);
+      }
+      return item;
+    });
+    localStorage.setItem(LocalStorage.listaJornadas, JSON.stringify(listaJornadas));
   }
 
   eliminarTransaccion(codigoProducto: string) {
@@ -84,8 +84,9 @@ export class LocalStorageService {
   obtenerJornada(idJornada: string): Jornada {
     let listaJornadas: Jornada[] = JSON.parse(localStorage.getItem(LocalStorage.listaJornadas));
     if (!listaJornadas) {
-      localStorage.setItem(LocalStorage.listaJornadas, JSON.stringify([]));
       listaJornadas = [];
+      listaJornadas.push(new Jornada(idJornada));
+      localStorage.setItem(LocalStorage.listaJornadas, JSON.stringify(listaJornadas));
     }
     const jornada = listaJornadas.find(item => item.id === idJornada);
     if (!jornada) {
