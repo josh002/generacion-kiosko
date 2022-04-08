@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { LocalStorage, Producto, Transaccion } from 'src/models/models';
+import { Jornada, LocalStorage, Producto, Transaccion } from 'src/models/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
+
 
   constructor() { }
 
@@ -76,6 +77,22 @@ export class LocalStorageService {
     const listaProductos: Producto[] = JSON.parse(localStorage.getItem(LocalStorage.listaJornadas));
     const productoBuscado = listaProductos.find(producto => producto.codigo === codigoProducto);
     return productoBuscado;
+  }
+
+  //-------- JORNADA -----------
+
+  obtenerJornada(idJornada: string): Jornada {
+    let listaJornadas: Jornada[] = JSON.parse(localStorage.getItem(LocalStorage.listaJornadas));
+    if (!listaJornadas) {
+      localStorage.setItem(LocalStorage.listaJornadas, JSON.stringify([]));
+      listaJornadas = [];
+    }
+    const jornada = listaJornadas.find(item => item.id === idJornada);
+    if (!jornada) {
+      listaJornadas.push(new Jornada(idJornada));
+      localStorage.setItem(LocalStorage.listaJornadas, JSON.stringify(listaJornadas));
+    }
+    return jornada;
   }
 
 }

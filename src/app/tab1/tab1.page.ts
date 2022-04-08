@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ModalController } from '@ionic/angular';
+import { Jornada } from 'src/models/models';
+import { LocalStorageService } from 'src/services/local-storage.service';
+import { TransaccionNuevaPage } from '../pages/transaccion-nueva/transaccion-nueva.page';
 
 @Component({
   selector: 'app-tab1',
@@ -7,17 +11,28 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  listaCodigos: string[] = [];
+  jornada: Jornada;
+  idJornada: string;
   constructor(
-    private barcodeScanner: BarcodeScanner
-  ) { }
+    public localStorageService: LocalStorageService,
+    public modalController: ModalController,
+  ) {
+    this.idJornada = new Date().toLocaleDateString('ES-AR');
+  }
 
-  escanearProducto() {
-    this.barcodeScanner.scan({ showTorchButton: true }).then(barcodeData => {
-      this.listaCodigos.push(barcodeData.text);
-    }).catch(err => {
-      console.log('Error', err);
+  ionViewWillEnter() {
+    this.obtenerJornada();
+  }
+  obtenerJornada() {
+    this.localStorageService.obtenerJornada(this.idJornada);
+  }
+
+  async nuevoProducto() {
+    const modal = await this.modalController.create({
+      component: TransaccionNuevaPage,
     });
+    await modal.present();
+    await modal.onDidDismiss().then(() => this.obtenerJornada());
   }
 
 }

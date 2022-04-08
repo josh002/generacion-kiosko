@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'editar-producto',
     loadChildren: () => import('./pages/editar-producto/editar-producto.module').then( m => m.EditarProductoPageModule)
+  },
+  {
+    path: 'transaccion-nueva',
+    loadChildren: () => import('./pages/transaccion-nueva/transaccion-nueva.module').then( m => m.TransaccionNuevaPageModule)
   }
 ];
 @NgModule({

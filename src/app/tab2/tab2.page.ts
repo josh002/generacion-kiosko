@@ -29,8 +29,6 @@ export class Tab2Page {
   }
 
   obtenerProductos() {
-    console.log('obtener productos');
-
     this.listaProductos = this.localStorageService.obtenerListaProductos() ?? [];
   }
 

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Venta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="transaccion-wrapper">
+    <div class="lista-productos-container">
+      <ion-card>
+        <div *ngFor="let producto of transaccionNueva.listaProductos">
+          <ion-item lines="inset">
+            <div class="producto-info">
+              <h3>{{producto.nombre}}</h3>
+              <div class="precio">$ {{producto.precio}}</div>
+            </div>
+            <ion-button color="danger" slot="end" fill="clear" (click)="borrarProducto(producto)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </div>
+        <div *ngIf="transaccionNueva.listaProductos.length === 0">
+          <ion-item lines="none">
+            <div class="producto-info">
+              <h3>Sin productos</h3>
+            </div>
+          </ion-item>
+        </div>
+        <ion-item *ngIf="transaccionNueva.listaProductos.length > 0" lines="inset">
+          <div class="producto-info">
+            <h3>Total</h3>
+            <div class="precio">$ {{transaccionNueva.total}}</div>
+          </div>
+          <ion-button class="hidden-item" color="danger" slot="end" fill="clear">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-card>
+      <ion-button (click)="agregarProducto()" expand="block" fill="clear" shape="round">
+        Agregar producto
+      </ion-button>
+    </div>
+
+  </div>
+  <ion-button class="save-button" (click)="guardarTransaccion()" expand="block" shape="round">
+    Guardar
+  </ion-button>
+</ion-content>

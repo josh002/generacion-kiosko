@@ -1,16 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Lista de productos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-item *ngFor="let codigo of listaCodigos">
-    <ion-label>{{codigo}}</ion-label>
-  </ion-item>
-  <ion-button (click)="escanearProducto()" expand="block" fill="clear" shape="round">
-    Scan
-  </ion-button>
+  <div class="lista-productos-container">
+    <ion-card *ngFor="let producto of listaTRa">
+      <ion-item lines="full">
+        <div class="producto-info">
+          <h3>{{producto.nombre}}</h3>
+          <div class="precio">$ {{producto.precio}}</div>
+        </div>
+        <ion-button color="dark" slot="end" fill="clear" (click)="editarProducto(producto)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="nuevoProducto()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

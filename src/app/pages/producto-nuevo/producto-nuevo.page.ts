@@ -41,4 +41,8 @@ export class ProductoNuevoPage implements OnInit {
       console.log('Error', err);
     });
   }
+
+  dismissModal() {
+    this.modalController.dismiss();
+  }
 }

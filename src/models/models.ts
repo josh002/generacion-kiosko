@@ -4,24 +4,38 @@ export class Producto {
     codigo: string;
     constructor() {
         this.nombre = '';
-        this.precio = null;
+        this.precio = 0;
         this.codigo = '';
     }
 }
 
-export interface Transaccion {
+export class Transaccion {
     listaProductos: Producto[];
     total: number;
     id: string;
     idJornada: string;
     fecha: string;
+
+    constructor() {
+        this.listaProductos = [];
+        this.total = 0;
+        this.id = '';
+        this.idJornada = '';
+        this.fecha = '';
+    }
 }
 
-export interface Jornada {
+export class Jornada {
     listaTransacciones: Transaccion[];
     total: number;
     fecha: string;
     id: string;
+    constructor(id: string) {
+        this.listaTransacciones = [];
+        this.total = 0;
+        this.fecha = '';
+        this.id = id;
+    }
 }
 
 export enum LocalStorage {
