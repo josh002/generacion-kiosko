@@ -57,6 +57,6 @@ export class TransaccionNuevaPage implements OnInit {
 
   calcularTotal() {
     this.transaccionNueva.total = 0;
-    this.listaProductos.forEach(producto => { this.transaccionNueva.total += Number(producto.precio); });
+    this.transaccionNueva.listaProductos.forEach(producto => { this.transaccionNueva.total += Number(producto.precio); });
   }
 }
