@@ -33,7 +33,7 @@ export class TransaccionNuevaPage implements OnInit {
   }
 
   agregarProducto() {
-    this.barcodeScanner.scan({ showTorchButton: true }).then(barcodeData => {
+    this.barcodeScanner.scan({ showTorchButton: true, resultDisplayDuration: 0 }).then(barcodeData => {
       const producto = this.localStorageService.obtenerProducto(barcodeData.text);
       if (producto) { this.transaccionNueva.listaProductos.push(producto); }
       this.calcularTotal();
@@ -41,6 +41,7 @@ export class TransaccionNuevaPage implements OnInit {
   }
 
   guardarTransaccion() {
+    if (this.transaccionNueva.total === 0) { return; }
     const hora = new Date().toLocaleTimeString('Es-Ar').split(':');
     this.transaccionNueva.hora = hora[0] + ':' + hora[1];
     this.localStorageService.guardarTransaccion(this.transaccionNueva);

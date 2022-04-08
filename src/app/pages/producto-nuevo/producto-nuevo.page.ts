@@ -35,7 +35,7 @@ export class ProductoNuevoPage implements OnInit {
   }
 
   escanearCodigo() {
-    this.barcodeScanner.scan({ showTorchButton: true }).then(barcodeData => {
+    this.barcodeScanner.scan({ showTorchButton: true, resultDisplayDuration: 0 }).then(barcodeData => {
       this.productoNuevo.codigo = barcodeData.text;
     }).catch(err => {
       console.log('Error', err);
