@@ -1,6 +1,6 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { ModalController } from '@ionic/angular';
+import { IonSearchbar, ModalController } from '@ionic/angular';
 import { Producto, Transaccion } from 'src/models/models';
 import { LocalStorageService } from 'src/services/local-storage.service';
 
@@ -10,8 +10,11 @@ import { LocalStorageService } from 'src/services/local-storage.service';
   styleUrls: ['./transaccion-nueva.page.scss'],
 })
 export class TransaccionNuevaPage implements OnInit {
+  @ViewChild('searchbar') searchbar: IonSearchbar;
   transaccionNueva = new Transaccion();
   listaProductos: Producto[] = [];
+  filtroProductos: Producto[] = [];
+
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -59,5 +62,24 @@ export class TransaccionNuevaPage implements OnInit {
   calcularTotal() {
     this.transaccionNueva.total = 0;
     this.transaccionNueva.listaProductos.forEach(producto => { this.transaccionNueva.total += Number(producto.precio); });
+  }
+
+  onSearchChange(ev) {
+    if (ev.detail.value) {
+      this.filtroProductos = this.listaProductos.filter(producto =>
+        producto.nombre.toLocaleLowerCase().includes(ev.detail.value.toLocaleLowerCase())
+      );
+    }
+  }
+
+  productoSeleccionado(producto: Producto) {
+    this.filtroProductos = [];
+    this.transaccionNueva.listaProductos.push(producto);
+    this.searchbar.value = null;
+    this.calcularTotal();
+  }
+
+  onSearchClear() {
+    this.filtroProductos = [];
   }
 }

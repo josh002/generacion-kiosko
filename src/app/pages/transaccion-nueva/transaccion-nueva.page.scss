@@ -1,4 +1,6 @@
 .lista-productos-container {
+    display: flex;
+    flex-direction: column;
     .producto-info {
         display: flex;
         flex-direction: row;
@@ -18,12 +20,8 @@
     }
 }
 .save-button {
-    position: absolute;
-    bottom: 4vw;
-    width: 92vw;
-    left: 0;
-    right: 0;
-    margin: auto;
+    width: 90%;
+    margin: 3vw auto;
 }
 
 ion-item {
@@ -33,4 +31,16 @@ ion-item {
 
 .hidden-item {
     visibility: hidden;
+}
+
+.scan-button {
+    width: max-content;
+    margin-left: auto;
+    margin-right: 3vw;
+    color: black;
+    --background: white;
+    font-weight: bold;
+    ion-icon {
+        margin-left: 10px;
+    }
 }

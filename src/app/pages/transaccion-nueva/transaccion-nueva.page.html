@@ -11,9 +11,20 @@
 
 <ion-content>
   <div class="transaccion-wrapper">
+    <div class="search-container">
+      <ion-searchbar #searchbar placeholder="Buscar producto" (ionClear)="onSearchClear()"
+        (ionChange)="onSearchChange($event)" [debounce]="250">
+      </ion-searchbar>
+      <ion-list *ngIf="filtroProductos.length > 0">
+        <ion-item (click)="productoSeleccionado(producto)" *ngFor="let producto of filtroProductos">
+          <ion-label>{{producto.nombre}}</ion-label>
+          <div slot="end">$ {{producto.precio}}</div>
+        </ion-item>
+      </ion-list>
+    </div>
     <div class="lista-productos-container">
       <ion-card>
-        <div *ngFor="let producto of transaccionNueva.listaProductos">
+        <div *ngFor="let producto of transaccionNueva.listaProductos;let i = index">
           <ion-item lines="inset">
             <div class="producto-info">
               <h3>{{producto.nombre}}</h3>
@@ -27,11 +38,11 @@
         <div *ngIf="transaccionNueva.listaProductos.length === 0">
           <ion-item lines="none">
             <div class="producto-info">
-              <h3>Sin productos</h3>
+              <div>Sin productos</div>
             </div>
           </ion-item>
         </div>
-        <ion-item *ngIf="transaccionNueva.listaProductos.length > 0" lines="inset">
+        <ion-item *ngIf="transaccionNueva.listaProductos.length > 0" lines="none">
           <div class="producto-info">
             <h3>Total</h3>
             <div class="precio">$ {{transaccionNueva.total}}</div>
@@ -40,14 +51,19 @@
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
         </ion-item>
+        <ion-button *ngIf="transaccionNueva.listaProductos.length > 0" class="save-button"
+          (click)="guardarTransaccion()" expand="block">
+          Guardar
+        </ion-button>
       </ion-card>
-      <ion-button (click)="agregarProducto()" expand="block" fill="clear" shape="round">
-        Agregar producto
+      <ion-button class="scan-button" (click)="agregarProducto()">
+        Scan
+        <ion-icon name="barcode-outline"></ion-icon>
       </ion-button>
     </div>
 
   </div>
-  <ion-button class="save-button" (click)="guardarTransaccion()" expand="block" shape="round">
+  <!-- <ion-button class="save-button" (click)="guardarTransaccion()" expand="block" shape="round">
     Guardar
-  </ion-button>
+  </ion-button> -->
 </ion-content>
