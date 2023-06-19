@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Producto } from 'src/models/models';
 import { LocalStorageService } from 'src/services/local-storage.service';
-import { ProductoNuevoPage } from '../pages/producto-nuevo/producto-nuevo.page';
+import readXlsxFile from 'read-excel-file'
+import { UploadInfo } from 'src/models/models';
 
 @Component({
   selector: 'app-tab2',
@@ -10,34 +10,51 @@ import { ProductoNuevoPage } from '../pages/producto-nuevo/producto-nuevo.page';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  listaProductos: Producto[] = [];
+  @ViewChild('inputFile') inputFile: HTMLIonInputElement;
+  listItems: any = [];
+  lastDoc: UploadInfo;
+  newDoc: UploadInfo;
+
   constructor(
     public modalController: ModalController,
     public localStorageService: LocalStorageService,
-  ) { }
+  ) {
+    this.lastDoc = localStorageService.getLastDocInfo();
+  }
 
   ionViewWillEnter() {
-    this.obtenerProductos();
   }
 
-  async nuevoProducto() {
-    const modal = await this.modalController.create({
-      component: ProductoNuevoPage,
-    });
-    await modal.present();
-    await modal.onDidDismiss().then(() => this.obtenerProductos());
+  public changeListener(ev: any) {
+    const files: FileList = ev.target.files;
+    console.log(files);
+    if (files && files.length > 0) {
+      const file: File = files.item(0) as any;
+      let auxProducts: UploadInfo = {
+        date: new Date().toLocaleDateString('es-ES', { day: "numeric", month: "long", weekday: "long", year: "numeric" }),
+        productQuantity: 0,
+        docName: file.name,
+        rows: []
+      }
+      readXlsxFile(file).then((rows) => {
+        auxProducts.rows = rows;
+        auxProducts.productQuantity = rows.length - 2;
+        this.newDoc = auxProducts;
+        console.log(this.newDoc)
+      })
+    }
   }
 
-  obtenerProductos() {
-    this.listaProductos = this.localStorageService.obtenerListaProductos() ?? [];
+  async clickToInput() {
+    const inputEl = await this.inputFile.getInputElement();
+    inputEl.click();
   }
 
-  async editarProducto(producto: Producto) {
-    // this.localStorageService.editarProducto(producto);
-  }
-
-  eliminarProducto(producto: Producto) {
-    this.localStorageService.eliminarProducto(producto.codigo);
-    this.obtenerProductos();
+  onSave() {
+    this.localStorageService.saveDocInfo(this.newDoc);
+    this.lastDoc = null;
+    this.newDoc = null;
+    this.lastDoc = this.localStorageService.getLastDocInfo();
   }
 }
+

@@ -1,5 +1,4 @@
 import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { IonSearchbar, ModalController } from '@ionic/angular';
 import { Producto, Transaccion } from 'src/models/models';
 import { LocalStorageService } from 'src/services/local-storage.service';
@@ -17,7 +16,6 @@ export class TransaccionNuevaPage implements OnInit {
 
 
   constructor(
-    private barcodeScanner: BarcodeScanner,
     public localStorageService: LocalStorageService,
     public modalController: ModalController,
   ) { }
@@ -36,11 +34,7 @@ export class TransaccionNuevaPage implements OnInit {
   }
 
   agregarProducto() {
-    this.barcodeScanner.scan({ showTorchButton: true, resultDisplayDuration: 0 }).then(barcodeData => {
-      const producto = this.localStorageService.obtenerProducto(barcodeData.text);
-      if (producto) { this.transaccionNueva.listaProductos.push(producto); }
-      this.calcularTotal();
-    });
+    
   }
 
   guardarTransaccion() {
@@ -56,7 +50,6 @@ export class TransaccionNuevaPage implements OnInit {
   }
 
   obtenerProductos() {
-    this.listaProductos = this.localStorageService.obtenerListaProductos() ?? [];
   }
 
   calcularTotal() {

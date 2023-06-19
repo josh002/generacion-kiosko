@@ -1,24 +1,63 @@
-.lista-productos-container {
-    .producto-info {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        width: 100%;
-        justify-content: space-between;
-        h3 {
-            font-weight: bold;
-            text-transform: capitalize;
-            font-size: 20px;
-            margin: 0;
-        }
-        .precio {
-            font-size: 18px;
-            font-weight: bold;
-            color: gray;
-        }
+ion-content {
+    --background: #f2f2f2;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.title-list {
+    color: gray;
+    font-size: 14px;
+    margin: 0 0 10px;
+}
+
+.info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 4vw;
+    background: white;
+    margin: 4vw;
+}
+
+.input-wrapper {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    width: max-content;
+    margin: 0 auto;
+    ion-input {
+        visibility: hidden;
+        max-width: 0;
+        min-width: 0;
+        height: 0;
+        width: 0;
+        position: absolute;
+    }
+    .upload-button {
+        background: white;
+        border-radius: 4px;
+        border: 1px solid;
+        width: 80vw;
     }
 }
 
-ion-button {
-    --padding-end: 0;
+.empty-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+    align-items: center;
+    width: 100vw;
+    height: 80vh;
+    color: grey;
+    font-size: 22px;
+    ion-icon {
+        font-size: 50px;
+    }
 }

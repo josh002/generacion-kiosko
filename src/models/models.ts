@@ -38,6 +38,13 @@ export class Jornada {
 }
 
 export enum LocalStorage {
-    listaProductos = 'listaProductos',
+    docInfo = 'docInfo',
     listaJornadas = 'listaJornadas',
+}
+
+export interface UploadInfo {
+    date: string;
+    productQuantity: number;
+    rows?: Array<{}>;
+    docName: string;
 }

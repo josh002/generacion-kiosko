@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController } from '@ionic/angular';
 import { Jornada } from 'src/models/models';
 import { LocalStorageService } from 'src/services/local-storage.service';
@@ -25,7 +24,6 @@ export class Tab1Page {
   }
 
   obtenerJornada() {
-    this.jornada = this.localStorageService.obtenerJornada(this.idJornada);
   }
 
   async nuevoProducto() {

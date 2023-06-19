@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ModalController } from '@ionic/angular';
 import { Producto } from 'src/models/models';
 import { LocalStorageService } from 'src/services/local-storage.service';
@@ -12,7 +11,6 @@ import { LocalStorageService } from 'src/services/local-storage.service';
 export class ProductoNuevoPage implements OnInit {
   productoNuevo = new Producto();
   constructor(
-    private barcodeScanner: BarcodeScanner,
     public localStorageService: LocalStorageService,
     public modalController: ModalController,
 
@@ -23,7 +21,6 @@ export class ProductoNuevoPage implements OnInit {
 
   guardarProducto() {
     if (!this.validarProducto()) { return; }
-    this.localStorageService.guardarProducto(this.productoNuevo);
     this.modalController.dismiss();
   }
 
@@ -35,11 +32,7 @@ export class ProductoNuevoPage implements OnInit {
   }
 
   escanearCodigo() {
-    this.barcodeScanner.scan({ showTorchButton: true, resultDisplayDuration: 0 }).then(barcodeData => {
-      this.productoNuevo.codigo = barcodeData.text;
-    }).catch(err => {
-      console.log('Error', err);
-    });
+ 
   }
 
   dismissModal() {

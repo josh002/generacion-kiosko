@@ -1,28 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Lista de transacciones
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <div class="lista-productos-container">
-    <ion-card *ngFor="let transaccion of jornada.listaTransacciones">
-      <ion-item lines="full">
-        <div class="producto-info">
-          <h3>{{transaccion.hora}}</h3>
-          <div class="precio">$ {{transaccion.total}}</div>
-        </div>
-        <ion-button color="dark" slot="end" fill="clear" (click)="editarProducto(producto)">
-          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-card>
+   
   </div>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="nuevoProducto()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
