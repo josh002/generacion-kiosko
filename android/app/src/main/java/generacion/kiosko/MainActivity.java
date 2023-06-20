@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package generacion.kiosko;
 
 import com.getcapacitor.BridgeActivity;
 

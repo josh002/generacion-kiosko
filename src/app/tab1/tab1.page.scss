@@ -1,3 +1,56 @@
 ion-content {
     --background: #f2f2f2;
+    .lista-productos-container{
+        padding-bottom: 46px;
+    }
+    .info-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 4vw;
+        background: white;
+        margin: 4vw;
+        border-radius: 4px;
+    }
+
+    .title-list {
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0 0 10px;
+    }
+
+    .subtitle {
+        color: gray;
+        font-size: 12px;
+        margin: 0 0 10px;
+    }
+    ion-list {
+        padding: 0;
+    }
+
+    ion-item {
+        margin-bottom: 5px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .item-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        .top {
+            color: gray;
+            font-size: 14px;
+        }
+        .bottom {
+            font-size: 16px;
+        }
+    }
+}
+ion-button {
+    position: absolute;
+    bottom: 10px;
+    width: 90vw;
+    left: 5vw;
 }

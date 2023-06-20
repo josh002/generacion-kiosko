@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Jornada } from 'src/models/models';
+import { UploadInfo } from 'src/models/models';
 import { LocalStorageService } from 'src/services/local-storage.service';
-import { TransaccionNuevaPage } from '../pages/transaccion-nueva/transaccion-nueva.page';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 
 @Component({
   selector: 'app-tab1',
@@ -10,28 +10,48 @@ import { TransaccionNuevaPage } from '../pages/transaccion-nueva/transaccion-nue
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  jornada: Jornada;
-  idJornada: string;
+  lastDoc: UploadInfo;
+  foundElement;
+
+  handleBackButton: () => Promise<void>;
+
   constructor(
     public localStorageService: LocalStorageService,
     public modalController: ModalController,
   ) {
-    this.idJornada = new Date().toLocaleDateString('ES-AR');
-    this.obtenerJornada();
   }
 
-  ionViewWillEnter() {
+  async ionViewDidEnter() {
+    this.lastDoc = this.localStorageService.getLastDocInfo();
+    console.log(this.lastDoc)
+    document.addEventListener("ionBackButton", this.handleBackButton = async () => {
+      document.querySelector('body').style.visibility = "visible";
+      await BarcodeScanner.stopScan();
+    })
   }
 
-  obtenerJornada() {
+  ionViewDidLeave() {
+    document.removeEventListener("ionBackButton", this.handleBackButton);
   }
 
-  async nuevoProducto() {
-    const modal = await this.modalController.create({
-      component: TransaccionNuevaPage,
-    });
-    await modal.present();
-    await modal.onDidDismiss().then(() => this.obtenerJornada());
+  async scan() {
+    document.querySelector('body').style.visibility = "hidden";
+    await BarcodeScanner.checkPermission({ force: true });
+    const result = await BarcodeScanner.startScan();
+    if (result.hasContent) {
+      this.searchItem(result.content);
+    }
+    await BarcodeScanner.stopScan();
+    document.querySelector('body').style.visibility = "visible";
   }
 
+  searchItem(content: string) {
+    const found = this.lastDoc.rows.find(r => r[0] == content);
+    if (found) {
+      this.foundElement = found;
+      console.log(this.foundElement);
+    } else {
+      this.foundElement = undefined;
+    }
+  }
 }
