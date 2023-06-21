@@ -1,4 +1,4 @@
-package generacion.kiosko;
+package cobareader.app;
 
 import com.getcapacitor.BridgeActivity;
 

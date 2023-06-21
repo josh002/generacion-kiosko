@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Generacion Kiosko</string>
-    <string name="title_activity_main">Generacion Kiosko</string>
-    <string name="package_name">generacion.kiosko</string>
-    <string name="custom_url_scheme">generacion.kiosko</string>
+    <string name="app_name">CoBaReadeR</string>
+    <string name="title_activity_main">CoBaReadeR</string>
+    <string name="package_name">cobareader.app</string>
+    <string name="custom_url_scheme">cobareader.app</string>
 </resources>

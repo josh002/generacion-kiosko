@@ -1,6 +1,6 @@
 {
-	"appId": "generacion.kiosko",
-	"appName": "Generacion Kiosko",
+	"appId": "cobareader.app",
+	"appName": "CoBaReadeR",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {
