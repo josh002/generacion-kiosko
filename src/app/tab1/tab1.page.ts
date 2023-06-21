@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { UploadInfo } from 'src/models/models';
 import { LocalStorageService } from 'src/services/local-storage.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
@@ -18,6 +18,7 @@ export class Tab1Page {
   constructor(
     public localStorageService: LocalStorageService,
     public modalController: ModalController,
+    private alertController: AlertController
   ) {
   }
 
@@ -52,6 +53,17 @@ export class Tab1Page {
       console.log(this.foundElement);
     } else {
       this.foundElement = undefined;
+      this.presentAlert();
     }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      message: 'Producto no encontrado',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }
