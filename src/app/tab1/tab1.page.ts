@@ -46,7 +46,7 @@ export class Tab1Page {
   }
 
   searchItem(content: string) {
-    const found = this.lastDoc.rows.find(r => r[0] == content);
+    const found = this.lastDoc.rows.find(r => content.includes(r[0]));
     if (found) {
       this.foundElement = found;
       console.log(this.foundElement);

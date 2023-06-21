@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { LocalStorageService } from 'src/services/local-storage.service';
-import readXlsxFile from 'read-excel-file'
+import readXlsxFile, { readSheetNames } from 'read-excel-file'
 import { UploadInfo } from 'src/models/models';
 
 @Component({
@@ -25,23 +25,26 @@ export class Tab2Page {
   ionViewWillEnter() {
   }
 
-  public changeListener(ev: any) {
+  async changeListener(ev: any) {
     const files: FileList = ev.target.files;
     console.log(files);
     if (files && files.length > 0) {
-      const file: File = files.item(0) as any;
+      const file: File = files.item(0);
       let auxProducts: UploadInfo = {
         date: new Date().toLocaleDateString('es-ES', { day: "numeric", month: "long", weekday: "long", year: "numeric" }),
-        productQuantity: 0,
+        productQuantity: -2,
         docName: file.name,
         rows: []
       }
-      readXlsxFile(file).then((rows) => {
-        auxProducts.rows = rows;
-        auxProducts.productQuantity = rows.length - 2;
-        this.newDoc = auxProducts;
-        console.log(this.newDoc)
+      await readSheetNames(file).then(async (sheetNames) => {
+        sheetNames.forEach(async (sheetName) => {
+          await readXlsxFile(file, { sheet: sheetName }).then((rows) => {
+            auxProducts.rows = auxProducts.rows.concat(rows);
+            auxProducts.productQuantity += rows.length;
+          })
+        })
       })
+      this.newDoc = auxProducts;
     }
   }
 
