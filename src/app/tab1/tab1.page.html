@@ -1,4 +1,19 @@
 <ion-content [fullscreen]="true">
+  <h2>Buscar producto</h2>
+  <div class="top-search">
+    <ion-searchbar placeholder="Código de producto" inputmode="text" [debounce]="1000"
+      (ionInput)="onSearchChange($event)" [debounce]="250"
+      (ionClear)="onClear()"
+      ></ion-searchbar>
+    <ion-button (click)="scan()">
+      <ion-icon slot="icon-only" name="barcode-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <ion-list class="filtered-items-wrapper">
+    <ion-item (click)="selectItem(item)" *ngFor="let item of filteredElements">
+      <ion-label>{{item[1]}}</ion-label>
+    </ion-item>
+  </ion-list>
   <div class="lista-productos-container">
     <div *ngIf="foundElement" class="info-items">
       <ion-list>
@@ -79,6 +94,3 @@
     </div>
   </div>
 </ion-content>
-<ion-button (click)="scan()" expand="block">
-  Buscar producto
-</ion-button>

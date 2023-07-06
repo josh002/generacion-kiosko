@@ -1,8 +1,37 @@
 ion-content {
     --background: #f2f2f2;
-    .lista-productos-container{
-        padding-bottom: 46px;
+    h2 {
+        margin: 6vw 4vw 10px;
     }
+    .top-search {
+        margin: 0 4vw 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+        ion-searchbar {
+            border-radius: 4px;
+            --box-shadow: none;
+            padding: 0;
+            width: 80vw;
+        }
+        ion-button {
+            width: 90px;
+            height: 40px;
+            margin: 0;
+        }
+    }
+
+    .filtered-items-wrapper {
+        width: 74vw;
+        margin-left: 4vw;
+        max-height: 45vh;
+        border-radius: 0 0 8px 8px;
+        overflow-y: auto;
+        box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.1);
+    }
+
     .info-items {
         display: flex;
         flex-direction: column;
@@ -47,10 +76,4 @@ ion-content {
             font-size: 16px;
         }
     }
-}
-ion-button {
-    position: absolute;
-    bottom: 10px;
-    width: 90vw;
-    left: 5vw;
 }
