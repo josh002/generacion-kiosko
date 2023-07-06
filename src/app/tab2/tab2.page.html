@@ -32,9 +32,10 @@
     </ion-button>
   </div>
   <div class="input-wrapper">
-    <ion-input #inputFile multiple accept="file" type="file" (change)="changeListener($event)"
-      placeholder="Seleccione archivo"></ion-input>
-    <ion-button disabled="{{loading}}" class="upload-button" mode="ios" color="dark" fill="clear" (click)="clickToInput()">
+    <ion-input accept=".xlsx, .xls, .csv" #inputFile multiple type="file"
+      (change)="changeListener($event)" placeholder="Seleccione archivo"></ion-input>
+    <ion-button disabled="{{loading}}" class="upload-button" mode="ios" color="dark" fill="clear"
+      (click)="clickToInput()">
       <ion-spinner *ngIf="loading" name="dots"></ion-spinner>
       <ion-icon *ngIf="!loading" slot="start" name="cloud-upload-outline"></ion-icon>
       Cargar productos
