@@ -15,6 +15,8 @@ export class Tab2Page {
   lastDoc: UploadInfo;
   newDoc: UploadInfo;
 
+  loading: boolean = false;
+
   constructor(
     public modalController: ModalController,
     public localStorageService: LocalStorageService,
@@ -29,21 +31,23 @@ export class Tab2Page {
     const files: FileList = ev.target.files;
     console.log(files);
     if (files && files.length > 0) {
-      const file: File = files.item(0);
       let auxProducts: UploadInfo = {
         date: new Date().toLocaleDateString('es-ES', { day: "numeric", month: "long", weekday: "long", year: "numeric" }),
-        productQuantity: -2,
-        docName: file.name,
+        productQuantity: -2 * files.length,
+        docName: "",
         rows: []
       }
-      await readSheetNames(file).then(async (sheetNames) => {
-        sheetNames.forEach(async (sheetName) => {
-          await readXlsxFile(file, { sheet: sheetName }).then((rows) => {
-            auxProducts.rows = auxProducts.rows.concat(rows);
-            auxProducts.productQuantity += rows.length;
+      Object.keys(files).forEach(async (prop) => {
+        const file = files.item(parseInt(prop));
+        await readSheetNames(file).then(async (sheetNames) => {
+          sheetNames.forEach(async (sheetName) => {
+            await readXlsxFile(file, { sheet: sheetName }).then((rows) => {
+              auxProducts.rows = auxProducts.rows.concat(rows);
+              auxProducts.productQuantity += rows.length;
+            })
           })
         })
-      })
+      });
       this.newDoc = auxProducts;
     }
   }
